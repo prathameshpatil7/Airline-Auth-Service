@@ -1,16 +1,16 @@
 const express = require("express");
 const { PORT } = require("./config/serverConfig");
 const bodyParser = require("body-parser");
-// const ApiRoutes = require("./routes/index");
-// const db = require("./models/index");
-
+const ApiRoutes = require("./routes/index");
+const db = require("./models/index");
+const { User } = require("./models/index");
 const setupAndStartServer = async () => {
   const app = express();
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
-  //   app.use("/api", ApiRoutes);
+  app.use("/api", ApiRoutes);
   app.listen(PORT, async () => {
     console.log(`server is running on port ${PORT}`);
 
@@ -18,6 +18,11 @@ const setupAndStartServer = async () => {
     // if (process.env.SYNC_DB) {
     //   db.sequelize.sync({ alter: true });
     // }
+
+    // await User.create({
+    //   email: "patil4444@gmail.com",
+    //   password: "password",
+    // });
   });
 };
 
