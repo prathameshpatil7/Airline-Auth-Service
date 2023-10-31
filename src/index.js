@@ -3,7 +3,6 @@ const { PORT } = require("./config/serverConfig");
 const bodyParser = require("body-parser");
 const ApiRoutes = require("./routes/index");
 const db = require("./models/index");
-const { User } = require("./models/index");
 const setupAndStartServer = async () => {
   const app = express();
 
@@ -15,14 +14,9 @@ const setupAndStartServer = async () => {
     console.log(`server is running on port ${PORT}`);
 
     //when  we create any new model/associations, we need to sync it by uncommenting env variable
-    // if (process.env.SYNC_DB) {
-    //   db.sequelize.sync({ alter: true });
-    // }
-
-    // await User.create({
-    //   email: "patil4444@gmail.com",
-    //   password: "password",
-    // });
+    if (process.env.SYNC_DB) {
+      db.sequelize.sync({ alter: true });
+    }
   });
 };
 
